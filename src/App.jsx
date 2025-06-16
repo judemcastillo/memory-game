@@ -2,28 +2,42 @@ import { useState } from "react";
 import "./App.css";
 import MainMenu from "./components/MainMenu.jsx";
 import GamePhase from "./components/GamePhase.jsx";
+import Switch from "./components/Switch.jsx";
+
 
 function App() {
 	const [phase, setPhase] = useState("menu");
-	const [darkMode, setDarkMode] = useState(false);
+	const [darkMode, setDarkMode] = useState(true);
+	const [settings, setSettings] = useState({
+		theme: "images",
+		difficulty: "normal",
+	});
 
 	const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
+	const handleStart = (newSettings) => {
+		setSettings(newSettings);
+		setPhase("game");
+	};
+
 	return (
-		<div className={`app-container ${darkMode ? "dark" : ""}`}>
+		<div className={`app-container ${darkMode ? "" : "dark"}`}>
 			<main>
 				<div className="heading">
 					<h1 className="title">🧠 Memory Card Game</h1>
-					<button className="dark-toggle" onClick={toggleDarkMode}>
-						{darkMode ? "🌞 Light Mode" : "🌙 Dark Mode"}
-					</button>
+					<Switch onToggle={toggleDarkMode} darkMode={darkMode} />
 				</div>
 
 				{phase === "menu" ? (
-					<MainMenu onStart={() => setPhase("game")} />
+					<MainMenu onStart={handleStart} />
 				) : (
-					<GamePhase onBack={() => setPhase("menu")} />
+					<GamePhase
+						onBack={() => setPhase("menu")}
+						theme={settings.theme}
+						difficulty={settings.difficulty}
+					/>
 				)}
+				
 			</main>
 		</div>
 	);
