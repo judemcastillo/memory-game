@@ -11,16 +11,18 @@
 	--border-radius: 12px;
 	--container-bg: rgb(224, 224, 224);
 	--game-card-bg: hsla(42, 57%, 95%, 0.678);
+	--box-shadow: 0 4px 20px rgba(0, 0, 0, 0.342);
 }
 
 .dark {
 	--bg-color: #121212;
 	--text-color: #fff;
 	--card-bg: #393d57;
-	--button-bg: #1a73e8;
-	--button-hover: #3b8af8;
+	--button-bg: #3b8af8;
+	--button-hover: #0a50ac;
 	--container-bg: #28272bda;
 	--game-card-bg: hsla(250, 21%, 11%, 0.877);
+	--box-shadow: 0 4px 20px rgba(141, 139, 139, 0.322);
 }
 
 /* ============================= */
@@ -56,13 +58,14 @@ main {
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 	text-align: center;
 	transition: background-color 0.3s, color 0.3s;
-	width: calc(100vw - 200px);
+	min-width: calc(100vw - 200px);
 	min-height: calc(100vh - 200px);
 	height: fit-content;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	justify-self: center;
+	max-width: 500px;
 }
 
 .title {
@@ -84,8 +87,16 @@ main {
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
+	box-shadow: var(--box-shadow);
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	height: fit-content;
 }
-
+.back-button {
+	display: flex;
+}
+.menu-button {
+	margin-top: 30px;
+}
 .menu-button:hover,
 .back-button:hover {
 	background-color: var(--button-hover);
@@ -109,7 +120,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	justify-content: space-between;
+	justify-content: center;
 }
 .game-board {
 	display: flex;
@@ -132,6 +143,10 @@ main {
 	transition: transform 0.2s ease,
 		box-shadow 0.2s ease background-color 0.3s ease;
 	will-change: transform, box-shadow background-color;
+	min-height: 150px;
+	display: flex;
+	flex-direction: column;
+	min-width: 100px;
 
 	p {
 		margin: 0;
@@ -142,8 +157,9 @@ main {
 	}
 	.card-image {
 		border-radius: 0.7rem;
-		height: 200px;
-		width: 200px;
+		aspect-ratio: 1;
+
+		min-width: 80px;
 	}
 }
 .card:hover {
@@ -159,22 +175,43 @@ main {
 	align-items: center;
 	justify-content: center;
 	padding: 20px;
-	gap: 10px;
+	gap: 20px;
 	label {
-		border: 1px solid var(--text-color);
-		padding: 10px;
+		padding: 5px;
 		border-radius: var(--border-radius);
 		cursor: pointer;
+		height: 80px;
+		width: 180px;
+		box-shadow: var(--box-shadow);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		transition: transform 0.2s ease;
 	}
 	.theme-options {
 		display: flex;
 		flex-direction: row;
 		gap: 10px;
+		flex-wrap: wrap;
+		justify-content: center;
 	}
+}
+.theme-options label:hover {
+	transform: scale(1.08);
+	transition: transform 0.4s ease;
+	will-change: transform;
 }
 .controller {
 	height: 20px;
 	width: 20px;
+}
+.score {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 30px;
 }
 /* ============================= */
 /* Loader Styles      */
@@ -300,4 +337,101 @@ main {
 	animation-delay: 0.6s;
 	left: 0;
 	top: 0;
+}
+/* ============================= */
+/* Media Queries                */
+/* ============================= */
+
+.card.correct {
+	box-shadow: 0 0 20px 8px limegreen;
+	transform: scale(1.2);
+	transition: box-shadow 0.3s ease transform 0.2s ease;
+}
+
+.card.wrong {
+	box-shadow: 0 0 20px 8px red;
+}
+
+/* .shake {
+	animation: shake 0.4s;
+	transform: scale(1.2);
+} */
+
+@keyframes shake {
+	0% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-6px);
+	}
+	50% {
+		transform: translateX(6px);
+	}
+	75% {
+		transform: translateX(-4px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 999;
+	animation: fadeIn 0.3s ease forwards;
+}
+
+.modal {
+	background: white;
+	padding: 30px;
+	border-radius: 12px;
+	text-align: center;
+	max-width: 300px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	animation: scaleIn 0.3s ease forwards;
+}
+
+.modal-buttons {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.modal-buttons button {
+	padding: 10px 16px;
+	font-size: 14px;
+	cursor: pointer;
+	border: none;
+	border-radius: 6px;
+	background: #007bff;
+	color: white;
+	transition: background 0.3s;
+}
+
+.modal-buttons button:hover {
+	background: #0056b3;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

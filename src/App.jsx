@@ -29,7 +29,7 @@ function App() {
 				</div>
 
 				{phase === "menu" ? (
-					<MainMenu onStart={handleStart} />
+					<MainMenu onStart={handleStart} settings={settings}/>
 				) : (
 					<GamePhase
 						onBack={() => setPhase("menu")}

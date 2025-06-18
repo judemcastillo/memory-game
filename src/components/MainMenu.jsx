@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { IoLogoGameControllerB } from "react-icons/io";
 
-function MainMenu({ onStart }) {
+function MainMenu({ onStart, settings }) {
 	const [theme, setTheme] = useState("images");
 	const [difficulty, setDifficulty] = useState("normal");
+
+	useEffect(() => {
+		setTheme(settings.theme);
+		setDifficulty(settings.difficulty);
+	}, [settings]);
 
 	const handleStart = () => {
 		onStart({ theme, difficulty }); // pass theme and difficulty back to App
@@ -12,7 +17,7 @@ function MainMenu({ onStart }) {
 	return (
 		<div className="game-container">
 			<div className="settings">
-				<h3>Game Theme</h3>
+				<h2>Game Theme:</h2>
 				<div className="theme-options">
 					<label>
 						<input
@@ -35,7 +40,7 @@ function MainMenu({ onStart }) {
 						Emoji Theme
 					</label>
 				</div>
-				<h3>Difficulty:</h3>
+				<h2>Difficulty:</h2>
 				<div className="theme-options">
 					<label>
 						<input
@@ -45,7 +50,7 @@ function MainMenu({ onStart }) {
 							checked={difficulty === "easy"}
 							onChange={(e) => setDifficulty(e.target.value)}
 						/>
-						Easy (6 cards)
+						Easy
 					</label>
 					<label>
 						<input
@@ -55,7 +60,7 @@ function MainMenu({ onStart }) {
 							checked={difficulty === "normal"}
 							onChange={(e) => setDifficulty(e.target.value)}
 						/>
-						Normal (12 cards)
+						Normal
 					</label>
 					<label>
 						<input
@@ -65,14 +70,13 @@ function MainMenu({ onStart }) {
 							checked={difficulty === "hard"}
 							onChange={(e) => setDifficulty(e.target.value)}
 						/>
-						Hard (18 cards)
+						Hard
 					</label>
 				</div>
+				<button className="menu-button" onClick={handleStart}>
+					Start Game <IoLogoGameControllerB className="controller" />
+				</button>
 			</div>
-
-			<button className="menu-button" onClick={handleStart}>
-				Start Game <IoLogoGameControllerB className="controller"/>
-			</button>
 		</div>
 	);
 }
