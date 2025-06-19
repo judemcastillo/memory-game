@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { IoLogoGameControllerB } from "react-icons/io";
 
 function MainMenu({ onStart, settings }) {
@@ -17,6 +17,15 @@ function MainMenu({ onStart, settings }) {
 	return (
 		<div className="game-container">
 			<div className="settings">
+				<div className="instructions"> 
+				<h2>How to play <div className="vl"></div></h2>
+				
+				<p>
+					Select your preferred theme and difficulty, then press Start Game. Try
+					to click on each card only once per round, if you click the same card
+					twice, the game ends. Challenge yourself to get the highest score you
+					can!
+				</p></div>
 				<h2>Game Theme:</h2>
 				<div className="theme-options">
 					<label>

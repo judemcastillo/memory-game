@@ -24,7 +24,7 @@ function App() {
 		<div className={`app-container ${darkMode ? "" : "dark"}`}>
 			<main>
 				<div className="heading">
-					<h1 className="title">🧠 Memory Card Game</h1>
+					<h1 className="title">Memory Card Game</h1>
 					<Switch onToggle={toggleDarkMode} darkMode={darkMode} />
 				</div>
 
