@@ -144,16 +144,16 @@ function GamePhase({ onBack, theme, difficulty }) {
 	return (
 		<>
 			<div className="game-container">
-				<div className="game-board">
-					<div className="score">
-						<div className="score-info">
-							<p>Score: {score}</p>
-							<p>Best Score: {bestScore}</p>
-						</div>
-						<button className="back-button" onClick={onBack}>
-							Back to Menu
-						</button>
+				<div className="score">
+					<div className="score-info">
+						<p>Score: {score}</p>
+						<p>Best Score: {bestScore}</p>
 					</div>
+					<button className="back-button" onClick={onBack}>
+						Back to Menu
+					</button>
+				</div>
+				<div className="game-board">
 					{cards.map((card) => (
 						<div
 							key={card.id}

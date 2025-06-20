@@ -41,7 +41,7 @@ function fetchCards(theme = "images", difficulty = "normal") {
     } else {
       gameCards.push({
         id: i,
-        name: `Card ${i + 1}`,
+        name: `Card ${Math.floor((Math.random() * 100) + 1)}`,
         image: `https://picsum.photos/200?random=${i + 1}`,
         emoji: null,
       });

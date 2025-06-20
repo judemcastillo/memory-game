@@ -182,6 +182,11 @@ main {
 	padding: 10px 30px;
 	width: 100%;
 }}
+.score {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	padding: 10px 30px;
+	width: 85%;}
 
 .score button {
 	grid-column: 3/4;
